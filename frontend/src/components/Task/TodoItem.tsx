@@ -1,26 +1,26 @@
 import React, { useState } from 'react'
-import type { Task } from '../../types'
+import type { Todo } from '../../types'
 
-interface TaskItemProps {
-  task: Task
+interface TodoItemProps {
+  todo: Todo
   onToggleComplete: (id: string) => void
-  onEdit: (id: string, title: string, description: string) => void
+  onEdit: (id: string, title: string) => void
   onDelete: (id: string) => void
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({
-  task,
+const TodoItem: React.FC<TodoItemProps> = ({
+  todo,
   onToggleComplete,
   onEdit,
   onDelete,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
-  const [title, setTitle] = useState(task.title)
+  const [title, setTitle] = useState(todo.title)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (title.trim()) {
-      onEdit(task.id, title, '')
+      onEdit(todo.id, title)
       setIsEditing(false)
     }
   }
@@ -28,7 +28,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   return (
     <div
       className={`p-3 mb-2 border rounded-md transition-colors ${
-        task.completed ? 'bg-gray-50 border-gray-200' : 'bg-white border-gray-300'
+        todo.completed ? 'bg-gray-50 border-gray-200' : 'bg-white border-gray-300'
       }`}>
       {isEditing ? (
         <form onSubmit={handleSubmit} className="flex items-center gap-2">
@@ -80,15 +80,15 @@ const TaskItem: React.FC<TaskItemProps> = ({
         <div className="flex items-center">
           <input
             type="checkbox"
-            checked={task.completed}
-            onChange={() => onToggleComplete(task.id)}
+            checked={todo.completed}
+            onChange={() => onToggleComplete(todo.id)}
             className="w-4 h-4 accent-blue-500 cursor-pointer mr-3"
           />
           <span
             className={`flex-1 ${
-              task.completed ? 'line-through text-gray-400' : 'text-gray-700'
+              todo.completed ? 'line-through text-gray-400' : 'text-gray-700'
             }`}>
-            {task.title}
+            {todo.title}
           </span>
           <div className="flex gap-1 ml-2">
             <button
@@ -104,7 +104,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
               </svg>
             </button>
             <button
-              onClick={() => onDelete(task.id)}
+              onClick={() => onDelete(todo.id)}
               className="p-1 text-gray-500 hover:bg-gray-100 rounded"
               aria-label="Delete task">
               <svg
@@ -126,4 +126,4 @@ const TaskItem: React.FC<TaskItemProps> = ({
   )
 }
 
-export default TaskItem
+export default TodoItem

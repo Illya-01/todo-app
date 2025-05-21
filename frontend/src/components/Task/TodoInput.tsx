@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 
-interface TaskInputProps {
+interface TodoInputProps {
   listId: string
-  onAddTask: (listId: string, title: string, description: string) => void
+  onAddTodo: (listId: string, title: string) => void
 }
 
-const TaskInput: React.FC<TaskInputProps> = ({ listId, onAddTask }) => {
-  const [newTaskTitle, setNewTaskTitle] = useState('')
+const TodoInput: React.FC<TodoInputProps> = ({ listId, onAddTodo }) => {
+  const [newTodoTitle, setNewTodoTitle] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (newTaskTitle.trim()) {
-      onAddTask(listId, newTaskTitle, '') // Empty description
-      setNewTaskTitle('')
+    if (newTodoTitle.trim()) {
+      onAddTodo(listId, newTodoTitle)
+      setNewTodoTitle('')
     }
   }
 
@@ -22,8 +22,8 @@ const TaskInput: React.FC<TaskInputProps> = ({ listId, onAddTask }) => {
         <input
           type="text"
           placeholder="Add a new task..."
-          value={newTaskTitle}
-          onChange={e => setNewTaskTitle(e.target.value)}
+          value={newTodoTitle}
+          onChange={e => setNewTodoTitle(e.target.value)}
           className="flex-1 p-2 border rounded-l focus:outline-none focus:ring-1 focus:ring-blue-400"
         />
         <button
@@ -36,4 +36,4 @@ const TaskInput: React.FC<TaskInputProps> = ({ listId, onAddTask }) => {
   )
 }
 
-export default TaskInput
+export default TodoInput

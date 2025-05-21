@@ -1,19 +1,19 @@
 import React from 'react'
 import ListHeader from './ListHeader'
-import TaskInput from './TaskInput'
-import TaskList from './TaskList'
-import type { Task } from '../../types'
+import TodoInput from './TodoInput'
+import TodoList from './TodoList'
+import type { Todo } from '../../types'
 
 interface TaskListViewProps {
   listId: string
   name: string
-  tasks: Task[]
+  tasks: Todo[]
   onRenameList: (id: string, name: string) => void
   onDeleteList: (id: string) => void
-  onAddTask: (listId: string, title: string, description: string) => void
-  onEditTask: (taskId: string, title: string, description: string) => void
-  onToggleTask: (taskId: string) => void
-  onDeleteTask: (taskId: string) => void
+  onAddTodo: (listId: string, title: string) => void
+  onEditTodo: (taskId: string, title: string) => void
+  onToggleTodo: (taskId: string) => void
+  onDeleteTodo: (taskId: string) => void
 }
 
 const TaskListView: React.FC<TaskListViewProps> = ({
@@ -22,10 +22,10 @@ const TaskListView: React.FC<TaskListViewProps> = ({
   tasks,
   onRenameList,
   onDeleteList,
-  onAddTask,
-  onEditTask,
-  onToggleTask,
-  onDeleteTask,
+  onAddTodo,
+  onEditTodo,
+  onToggleTodo,
+  onDeleteTodo,
 }) => {
   return (
     <div className="p-5 bg-white border rounded-lg shadow-sm">
@@ -36,13 +36,13 @@ const TaskListView: React.FC<TaskListViewProps> = ({
         onDeleteList={onDeleteList}
       />
 
-      <TaskInput listId={listId} onAddTask={onAddTask} />
+      <TodoInput listId={listId} onAddTodo={onAddTodo} />
 
-      <TaskList
-        tasks={tasks}
-        onToggleTask={onToggleTask}
-        onEditTask={onEditTask}
-        onDeleteTask={onDeleteTask}
+      <TodoList
+        todos={tasks}
+        onToggleTodo={onToggleTodo}
+        onEditTodo={onEditTodo}
+        onDeleteTodo={onDeleteTodo}
       />
     </div>
   )

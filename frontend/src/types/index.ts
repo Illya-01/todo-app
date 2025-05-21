@@ -1,12 +1,11 @@
-export interface Task {
+export interface Todo {
   id: string
   title: string
-  description: string
   completed: boolean
 }
 
-export interface TaskList {
+export interface TodoList {
   id: string
   name: string
-  tasks: Task[]
+  tasks: Todo[]
 }

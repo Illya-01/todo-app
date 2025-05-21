@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TaskListView from '../components/Task/TaskListView'
 import Modal from '../components/Modal'
-import { useTaskLists } from '../hooks/useTaskLists'
+import { useTodoLists } from '../hooks/useTodoLists'
 
 const Dashboard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -12,11 +12,11 @@ const Dashboard: React.FC = () => {
     addList,
     renameList,
     deleteList,
-    addTask,
-    editTask,
-    toggleTask,
-    deleteTask,
-  } = useTaskLists()
+    addTodo,
+    editTodo,
+    toggleTodo,
+    deleteTodo,
+  } = useTodoLists()
 
   const handleAddList = (e: React.FormEvent) => {
     e.preventDefault()
@@ -80,10 +80,10 @@ const Dashboard: React.FC = () => {
               tasks={list.tasks}
               onRenameList={renameList}
               onDeleteList={deleteList}
-              onAddTask={addTask}
-              onEditTask={editTask}
-              onToggleTask={toggleTask}
-              onDeleteTask={deleteTask}
+              onAddTodo={addTodo}
+              onEditTodo={editTodo}
+              onToggleTodo={toggleTodo}
+              onDeleteTodo={deleteTodo}
             />
           ))}
         </div>
